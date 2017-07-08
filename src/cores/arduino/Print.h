@@ -34,8 +34,8 @@
 #endif
 #define BIN 2
 
-typedef unsigned long long uint64_t;
-typedef long long int64_t;
+//typedef unsigned long long uint64_t;
+//typedef long long int64_t;
 
 class Print
 {

@@ -38,6 +38,8 @@ extern char* utoa( unsigned long value, char *string, int radix ) ;
 extern char* itoa( int value, char *string, int radix ) ;
 extern char* ltoa( long value, char *string, int radix ) ;
 extern char* ultoa( unsigned long value, char *string, int radix ) ;
+//#pragma warning : there seems to be a problem with utoa depending on the compiler version
+extern char* utoa( unsigned long value, char *string, int radix ) ;
 #endif /* 0 */
 
 #ifdef __cplusplus
