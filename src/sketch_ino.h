@@ -19,7 +19,7 @@ int Counter=0;
 void loop(void)
 {
 
-  tft.print( Counter++); tft.print(" ");
-  Counter ++;
+  tft.print( Counter ); tft.print(" ");
+  Counter++;
   delay(1000);
 }

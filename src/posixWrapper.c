@@ -20,6 +20,7 @@
 #include <stdlib.h>		/* getenv(), etc. */
 #include <unistd.h>		/* sleep(), etc.  */
 #include <time.h>
+#include <sys/time.h>
 
 #include "posixWrapper.h"
 
@@ -41,24 +42,38 @@ long timer_end(struct timespec start_time){
 
 // Arduino Funktions
 
-uint32_t micros()
-{
-    struct timespec start_time;
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
-    //return start_time.tv_nsec/1000;
-    return start_time.tv_nsec;
 
+
+long long current_timestamp()
+{
+    struct timeval te;
+    gettimeofday(&te, NULL); // get current time
+    long long milliseconds = te.tv_sec*1000LL + te.tv_usec/1000; // caculate milliseconds
+    return milliseconds;
 }
 
 uint32_t millis()
 {
-    struct timespec start_time;
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
-    //return start_time.tv_nsec/1000000;
-    return start_time.tv_nsec/1000;
+	static int firstTimeFlag=1;
+	uint32_t t;
+
+    static uint64_t startTime_msec;
+	if(firstTimeFlag)
+	{
+		firstTimeFlag=0;
+		t=0;
+		startTime_msec=current_timestamp();
+	}else
+	{
+		t=current_timestamp()-startTime_msec;
+	}
+	return t;
 }
 
-
+uint32_t micros()
+{
+	millis()*1000;
+}
 
 void delayMicroseconds(uint32_t t)
 {
@@ -67,7 +82,7 @@ void delayMicroseconds(uint32_t t)
 
 void delay(uint32_t t)
 {
-	usleep(t*1000);
+	usleep( (uint64_t)t *1000);
 }
 
 void yield()

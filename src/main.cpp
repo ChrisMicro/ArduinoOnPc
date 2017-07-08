@@ -12,9 +12,9 @@ using namespace std;
 #include "posixWrapper.h"
 
 //#include "sketch_ino.h"
-#include "TFT_demo_ino.h"
+//#include "TFT_demo_ino.h"
 //#include "Touch_ino.h"
-//#include "Flappy_ino.h"
+#include "Flappy_ino.h"
 
 int main()
 {

@@ -112,7 +112,7 @@ void loop(void)
     scrPress = false;
   }
 
-delay(100);
+//delay(100);
 
 }
 
