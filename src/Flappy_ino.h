@@ -175,13 +175,13 @@ void drawFlappy(int x, int y) {
   tft.fillRect(x + 20, y + 20, 10, 2, BLACK);
 }
 void startGame() {
-  int fx = 50;
-  int fy = 125;
-  int fallRate = 1;
-  int pillarPos = 320;
-  int gapPos = 60;
-  bool crashed = false;
-  int score = 0;
+  //int fx = 50;
+  //int fy = 125;
+  //int fallRate = 1;
+  //int pillarPos = 320;
+  //int gapPos = 60;
+  //bool crashed = false;
+  //int score = 0;
 
   tft.fillScreen(BLUE);
   int ty = 230;

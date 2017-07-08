@@ -9,6 +9,10 @@
 #define ARDUINO_H_
 
 #include <stdint.h>
+#include "../../posixWrapper.h"
+
+
+
 typedef int boolean;
 //#define NULL 0
 

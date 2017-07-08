@@ -4,6 +4,8 @@ TFT_LinuxWrapper tft;
 
 void setup()
 {
+  Serial.begin(115200);
+  Serial.print("test");
   tft.begin();
   tft.fillScreen(LTDC_BLACK);
 
@@ -22,4 +24,5 @@ void loop(void)
   tft.print( Counter ); tft.print(" ");
   Counter++;
   delay(1000);
+  Serial.println(Counter);
 }
