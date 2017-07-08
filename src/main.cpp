@@ -14,10 +14,11 @@ using namespace std;
 
 SerialConsole Serial;
 
-#include "sketch.ino"
+//#include "sketch.ino"
 //#include "TFT_demo.ino"
 //#include "Touch.ino"
 //#include "Flappy.ino"
+#include "Adafruit_touchpaint.ino"
 
 int main()
 {

@@ -11,7 +11,7 @@
 ************************************************************************/
 
 #include "TFT_LinuxWrapper.h" // TFT
-#include "TouchScreen_Posix.h" // TOUCH
+#include "Touch_LinuxWrapper.h" // TOUCH
 
 TFT_LinuxWrapper tft;
 
@@ -111,8 +111,6 @@ void loop(void)
   else if (p.z == 0 && scrPress) {
     scrPress = false;
   }
-
-//delay(100);
 
 }
 
@@ -253,8 +251,8 @@ void drawLoop() {
     }
     else if (pillarPos < -50) {
       pillarPos = 320;
-      //gapPos = random(20, 120);
-      gapPos = 50;
+      gapPos = random(20, 120);
+      //gapPos = 50;
     }
   }
 

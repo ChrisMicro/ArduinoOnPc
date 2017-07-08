@@ -1,7 +1,7 @@
 // Adafruit compatible touchscreen wrapper
 // June 2017 by ChrisMicro
 
-#include "TouchScreen_Posix.h"
+#include "Touch_LinuxWrapper.h"
 
 
 void TouchScreen::Touch_Read()
