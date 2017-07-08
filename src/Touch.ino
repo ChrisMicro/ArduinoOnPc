@@ -5,7 +5,7 @@
 */
 
 #include "TFT_LinuxWrapper.h" // TFT
-#include "TouchScreen_Posix.h" // TOUCH
+#include "Touch_LinuxWrapper.h" // TOUCH
 
 TFT_LinuxWrapper tft;
 

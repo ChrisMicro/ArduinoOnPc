@@ -18,8 +18,8 @@ SerialConsole Serial;
 //#include "TFT_demo.ino"
 //#include "Touch.ino"
 //#include "Flappy.ino"
-//#include "Adafruit_touchpaint.ino"
-#include "Adafruit_pictureEmbed.ino"
+#include "Adafruit_touchpaint.ino"
+//#include "Adafruit_pictureEmbed.ino"
 
 int main()
 {
