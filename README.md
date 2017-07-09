@@ -30,8 +30,7 @@ What you need is Eclipse CDT ( CDT is the eclipse version which supports C/C++ i
 
 In Eclipse you can simply import this repository:
 
-File -> Import -> Git -> the URL of this Github repository
-
+File -> Import -> Git -> Projects from Git -> Clone URl -> URl -> https://github.com/ChrisMicro/ArduinoOnPc
  
 #### Linux
 
@@ -39,7 +38,7 @@ To emulate a TFT this project uses X11. Therefore you have to install X11 suppor
 
 Probably 
 
-sudo apt-get install libx11-dev
+> sudo apt-get install libx11-dev
 
 might be sufficient.
 
