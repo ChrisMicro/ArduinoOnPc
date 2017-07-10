@@ -17,8 +17,8 @@ SerialConsole Serial;
 //#include "sketch.ino"
 //#include "TFT_demo.ino"
 //#include "Touch.ino"
-//#include "Flappy.ino"
-#include "Adafruit_touchpaint.ino"
+#include "Flappy.ino"
+//#include "Adafruit_touchpaint.ino"
 //#include "Adafruit_pictureEmbed.ino"
 
 int main()

@@ -9,7 +9,7 @@
 #define ARDUINO_H_
 
 #include <stdint.h>
-#include "../../posixWrapper.h"
+#include "posixWrapper.h"
 
 
 
