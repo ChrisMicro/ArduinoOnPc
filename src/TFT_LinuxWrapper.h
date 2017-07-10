@@ -8,9 +8,9 @@
 #ifndef _TFT_LinuxWrapper_
 #define _TFT_LinuxWrapper_
 
-#include "./cores/arduino/Arduino.h"
+#include "Arduino.h"
 
-#include "./cores/arduino/Adafruit_GFX.h"
+#include "Adafruit_GFX.h"
 #include "posixWrapper.h"
 
 #define LTDC_BLACK       0x0000      /*   0,   0,   0 */
