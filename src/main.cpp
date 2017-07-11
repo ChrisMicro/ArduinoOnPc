@@ -11,13 +11,15 @@ using namespace std;
 
 #include "posixWrapper.h"
 #include "./cores/arduino/SerialConsole.h"
+#include "Arduino.h"
 
 SerialConsole Serial;
 
+#include "Blink.ino"
 //#include "sketch.ino"
 //#include "TFT_demo.ino"
 //#include "Touch.ino"
-#include "Flappy.ino"
+//#include "Flappy.ino"
 //#include "Adafruit_touchpaint.ino"
 //#include "Adafruit_pictureEmbed.ino"
 
