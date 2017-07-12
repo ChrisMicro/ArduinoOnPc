@@ -15,7 +15,8 @@ using namespace std;
 
 SerialConsole Serial;
 
-#include "Blink.ino"
+//#include "Blink.ino"
+#include "AnalogReadSerial.ino"
 //#include "sketch.ino"
 //#include "TFT_demo.ino"
 //#include "Touch.ino"

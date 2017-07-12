@@ -11,6 +11,14 @@
 #include <stdint.h>
 #include "posixWrapper.h"
 
+#define A0 0
+#define A1 1
+#define A2 2
+#define A3 3
+#define A4 4
+#define A5 5
+
+
 
 #define HIGH 0x1
 #define LOW  0x0
@@ -52,10 +60,15 @@ long random(long, long);
 void randomSeed(unsigned long);
 long map(long, long, long, long, long);
 
-// wiring_digital.c
+// wiring_digital.cpp
 void pinMode(uint8_t, uint8_t);
 void digitalWrite(uint8_t, uint8_t);
 int digitalRead(uint8_t);
+
+// wiring_analog.cpp
+int analogRead(uint8_t);
+void analogReference(uint8_t mode);
+void analogWrite(uint8_t, int);
 
 
 #endif /* ARDUINO_H_ */

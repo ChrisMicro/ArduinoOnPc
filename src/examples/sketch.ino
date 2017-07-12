@@ -23,6 +23,7 @@ void loop(void)
 
   tft.print( Counter ); tft.print(" ");
   Counter++;
+  analogWrite(1,Counter);
   delay(1000);
   Serial.println(Counter);
 }
