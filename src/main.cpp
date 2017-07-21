@@ -16,13 +16,14 @@ using namespace std;
 SerialConsole Serial;
 
 //#include "Blink.ino"
-#include "AnalogReadSerial.ino"
+//#include "AnalogReadSerial.ino"
 //#include "sketch.ino"
 //#include "TFT_demo.ino"
 //#include "Touch.ino"
 //#include "Flappy.ino"
 //#include "Adafruit_touchpaint.ino"
 //#include "Adafruit_pictureEmbed.ino"
+#include <gameOfLife.ino>
 
 int main()
 {
