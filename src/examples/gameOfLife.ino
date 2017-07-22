@@ -60,30 +60,6 @@ color_t getSurrounding(int x, int y, int index)
 	return color;
 }
 
-// this function is jtut a template, it is not used
-void calcNextField()
-{	
-	boolean nextField;
-	for( int x=1; x<DIMENSION_X -1; x++)
-	{
-		for(int y=1;y<DIMENSION_Y -1; y++)
-		{
-			color_t color=COLOR_BLACK;
-			color_t c;
-			for(int n=0;n<9;n++)
-			{
-				c=getSurrounding(x,y,n);
-				if( c != COLOR_BLACK ) color = c;
-			}
-			nextField =! SelectedField;
-			Field [nextField] [x] [y] = color;
-		}
-	}
-	SelectedField = nextField;
-	showField();
-	
-}
-
 /*
   
   https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
@@ -159,7 +135,6 @@ void setup()
 
 void loop(void)
 {
-	//calcNextField();
 	gameOfLife();	
 }
 
