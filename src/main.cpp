@@ -25,13 +25,13 @@ SerialConsole Serial;
 //#include "Adafruit_pictureEmbed.ino"
 //#include "gameOfLife.ino"
 //#include "cellArt.ino"
-#include "XWindow.h"
+//#include "XWindow.h"
 
 int main()
 {
-	XWindow win(480,270,"test");
-	win.initScreen();
-	delay(2000);
+	//XWindow win(480,270,"test");
+	//win.initScreen();
+	//delay(2000);
 
 
 	initScreen();
@@ -45,7 +45,7 @@ int main()
 
 	closeScreen();
 
-	win.closeScreen();
+	//win.closeScreen();
 	return 0;
 }
 

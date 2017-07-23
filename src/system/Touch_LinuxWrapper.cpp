@@ -2,20 +2,45 @@
 // June 2017 by ChrisMicro
 
 #include "Touch_LinuxWrapper.h"
+#include "XWindow.h"
 
+XWindow *TouchScreen::window=NULL;
 
-void TouchScreen::Touch_Read()
+void TouchScreen::setWindow(XWindow *win)
 {
-  if (!isInitialized)
-  {
-
-    isInitialized = true;
-  }
-  mouseUpdate();
-
+	window=win;
 }
 
-TSPoint::TSPoint(void) {
+TouchScreen::TouchScreen(uint8_t xp, uint8_t yp, uint8_t xm, uint8_t ym, uint16_t rxplate = 0)
+{
+	window = NULL;
+	isInitialized = false;
+}
+
+TouchScreen::TouchScreen()
+{
+	window = NULL;
+	isInitialized = false;
+}
+
+bool TouchScreen::Touch_Read()
+{
+	bool flag=false;
+	if ( !isInitialized )
+	{
+		isInitialized = true;
+	}
+
+	if(window!=NULL)
+	{
+		window->mouseUpdate();
+		flag=true;
+	}
+	return flag;
+}
+
+TSPoint::TSPoint(void)
+{
   x = y = z = 0;
 }
 
@@ -40,46 +65,48 @@ TSPoint TouchScreen::getPoint(void)
 {
   TSPoint p;
 
-  Touch_Read();
+  p.x=p.y=p.z=0;
 
-  p.x = MouseX;
-  p.y = MouseY;
-  p.z = MouseButtonLeft_flag * 500;
-
+  if(Touch_Read())
+  {
+	  p.x = window->MouseX;
+	  p.y = window->MouseY;
+	  p.z = window->MouseButtonLeft_flag * 500;
+  }
 
   return p;
 
 }
 
-TouchScreen::TouchScreen(uint8_t xp, uint8_t yp, uint8_t xm, uint8_t ym, uint16_t rxplate = 0)
-{
-  isInitialized = false;
-}
 
-TouchScreen::TouchScreen()
-{
-  isInitialized = false;
-}
 
 int TouchScreen::readTouchX(void)
 {
-  Touch_Read();
-  return MouseX;
+  if(Touch_Read())
+  {
+	  return window->MouseX;
+
+  }else return 0;
 }
 
 
 int TouchScreen::readTouchY(void)
 {
-  Touch_Read();
-  return MouseY;
+  if(Touch_Read())
+  {
+	  return window->MouseY;
+
+  }else return 0;
 }
 
 
 uint16_t TouchScreen::pressure(void)
 {
-  Touch_Read();
+	if(Touch_Read())
+	{
+		return MouseButtonLeft_flag  * 500;
 
-  return MouseButtonLeft_flag  * 500;
+	}else return 0;
 }
 
 /*

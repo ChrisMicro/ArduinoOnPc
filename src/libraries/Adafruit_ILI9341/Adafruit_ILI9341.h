@@ -10,8 +10,8 @@
 
 #define ILI9341_TFTWIDTH   240
 #define ILI9341_TFTHEIGHT  320
-#define ILI9341_TFTWIDTH   128  // ChrisMicro
-#define ILI9341_TFTHEIGHT  160
+//#define ILI9341_TFTWIDTH   128  // ChrisMicro
+//#define ILI9341_TFTHEIGHT  160
 
 #define ILI9341_NOP        0x00
 #define ILI9341_SWRESET    0x01

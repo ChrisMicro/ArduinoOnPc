@@ -39,8 +39,8 @@ Window XWindow::create_simple_window(Display* display, int width, int height, in
 	XSelectInput(display, win, ExposureMask);
 
 	// Name the window
-	XStoreName(display, win, "ArduinoOnPc");
-
+	//XStoreName(display, win, "ArduinoOnPc");
+	XStoreName(display, win, windowTitle);
 	XMapWindow(display, win);
 	while (1) {
 		XEvent event;
@@ -95,6 +95,21 @@ GC XWindow::create_gc( Display* display, Window win, int reverse_video )
 	return gc;
 }
 
+uint16_t XWindow::MouseX = 0;
+uint16_t XWindow::MouseY = 0;
+
+uint8_t XWindow::MouseButtonLeft_flag = 0;
+uint8_t XWindow::MouseButtonRight_flag = 0;
+
+XWindow::XWindow(int windowWidth, int windowHeight, char const* windowTitle)
+{
+	width  = windowWidth;
+	height = windowHeight;
+	this->windowTitle=windowTitle;
+
+
+}
+
 void XWindow::initScreen()
 {
 	char *display_name = getenv("DISPLAY");  // address of the X display.
@@ -112,14 +127,6 @@ void XWindow::initScreen()
 	screen_num = DefaultScreen(display);
 	display_width = DisplayWidth(display, screen_num);
 	display_height = DisplayHeight(display, screen_num);
-
-	// make the new window
-	// width = (display_width / 3);
-	// height = (display_height / 3);
-	width = (480);
-	height = (270);
-
-	printf("window width - '%d'; height - '%d'\n", width, height);
 
 	// create a simple window, as a direct child of the screen's
 	// root window. Use the screen's white color as the background
@@ -143,11 +150,104 @@ void XWindow::closeScreen()
 	XCloseDisplay(display);
 }
 
-XWindow::XWindow()
+void XWindow::setForeground_RGB(int r, int g, int b)
 {
+	XColor xcolour;
 
+	static int old_r = -1, old_g = -1, old_b = -1;
+
+	// check of color hasn't changed and return ( more speed )
+	if (r == old_r && g == old_g && b == old_b)
+		return;
+
+	old_r = r;
+	old_g = g;
+	old_b = b;
+
+	xcolour.red = r * 255;
+	xcolour.green = g * 255;
+	xcolour.blue = b * 255;
+
+	xcolour.flags = DoRed | DoGreen | DoBlue;
+	XAllocColor(display, screen_colormap, &xcolour);
+
+	XSetForeground(display, gc, xcolour.pixel); // BlackPixel(display, screen_num))
+}
+
+void XWindow::drawPoint_RGB(int x, int y, int r, int g, int b)
+{
+	setForeground_RGB(r, g, b);
+	XDrawPoint(display, win, gc, x, y);
+}
+
+uint16_t color565(uint8_t r, uint8_t g, uint8_t b)
+{
+	return ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3);
+}
+
+void XWindow::drawPoint_Color565(int x, int y, uint16_t color)
+{
+	int r = color >> 8;
+	int g = (color & 0x7E0) >> 3;
+	int b = (color & 0x1F) * 8;
+	drawPoint_RGB(x, y, r, g, b);
+}
+
+void XWindow::drawLine_RGB(int x1, int y1, int x2, int y2, int r, int g, int b)
+{
+	setForeground_RGB(r, g, b);
+	XDrawLine(display, win, gc, x1, y1, x2, y2);
 
 }
+
+void XWindow::drawLine_Color565(int x1, int y1, int x2, int y2, uint16_t color)
+{
+	int r = color >> 8;
+	int g = (color & 0x7E0) >> 3;
+	int b = (color & 0x1F) * 8;
+	drawLine_RGB(x1, y1, x2, y2, r, g, b);
+}
+
+void XWindow::showNow()
+{
+	//flush all pending requests to the X server.
+	XFlush(display);
+}
+
+
+
+void XWindow::mouseUpdate()
+{
+	Window ret_root;
+	Window ret_child;
+	int root_x;
+	int root_y;
+	int win_x;
+	int win_y;
+	unsigned int mask;
+
+	if (XQueryPointer(display, win, &ret_root, &ret_child, &root_x, &root_y,
+			&win_x, &win_y, &mask))
+	{
+		//printf("%d %d , %x\n", win_x, win_y, mask);
+		//if(mask&0x100)printf("left button pressed\n");
+		//if(mask&0x400)printf("right button pressed\n");
+		//if(mask&0x200)printf("center button pressed\n");
+		MouseX = win_x;
+		MouseY = win_y;
+		MouseButtonLeft_flag  = ((mask & 0x100) != 0);
+		MouseButtonRight_flag = ((mask & 0x400) != 0);
+	}
+
+}
+
+uint8_t XWindow::exitRequested()
+{
+	mouseUpdate();
+	return (uint8_t) MouseButtonRight_flag;
+}
+
+
 
 
 

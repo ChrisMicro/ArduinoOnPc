@@ -12,6 +12,8 @@
 
 #include "Adafruit_GFX.h"
 #include "posixWrapper.h"
+#include "XWindow.h"
+#include "Touch_LinuxWrapper.h"
 
 #define LTDC_BLACK       0x0000      /*   0,   0,   0 */
 #define LTDC_NAVY        0x000F      /*   0,   0, 128 */
@@ -34,11 +36,17 @@
 #define LTDC_PINK        0xF81F
 
 
-class TFT_LinuxWrapper : public Adafruit_GFX {
+class TFT_LinuxWrapper : public Adafruit_GFX
+{
+
+
   public:
+
+	XWindow *win;
+
     TFT_LinuxWrapper(): Adafruit_GFX((int16_t) 480, (int16_t) 270)
     {
-
+    	win=new XWindow(480,270,"TFT emulation");
     }
 
     void init()
@@ -48,7 +56,8 @@ class TFT_LinuxWrapper : public Adafruit_GFX {
 
     void begin()
     {
-
+    	win->initScreen();
+    	TouchScreen::setWindow(win);
 
     };
 
@@ -70,26 +79,25 @@ class TFT_LinuxWrapper : public Adafruit_GFX {
 */
     void drawPixel(int16_t x, int16_t y, uint16_t color)
     {
-    	drawPoint_Color565 ( x,y, color );
+    	win->drawPoint_Color565 ( x,y, color );
     };
 
     void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color)
     {
     	//for(int n=0;n<h;n++) drawPoint_Color565 ( x,y+n, color );
-    	drawLine_Color565(x,y,x,y+h,color);
+    	win->drawLine_Color565(x,y,x,y+h,color);
     };
 
     void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color)
     {
     	//for(int n=0;n<w;n++) drawPoint_Color565 ( x+n,y, color );
-    	drawLine_Color565(x,y,x+w,y,color);
+    	win->drawLine_Color565(x,y,x+w,y,color);
     };
 
     void fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color)
     {
     	for(int n=0;n<h;n++) drawFastHLine(x,y+n,w,color);
     	//showNow();
-
     };
 
     uint16_t color565(uint8_t r, uint8_t g, uint8_t b)

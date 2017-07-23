@@ -14,6 +14,7 @@
 class XWindow
 {
 private:
+	char const* windowTitle;
 	Display* display;				// pointer to X Display structure.
 	int screen_num;					// number of screen to place the window on.
 	Window win;						// pointer to the newly created window.
@@ -29,15 +30,26 @@ private:
 
 	Window create_simple_window(Display* display, int width, int height, int x,	int y);
 	GC     create_gc( Display* display, Window win, int reverse_video );
+	void setForeground_RGB(int r, int g, int b);
 
 public:
-	XWindow();
+	static uint16_t MouseX;
+	static uint16_t MouseY;
+
+	static uint8_t MouseButtonLeft_flag;
+	static uint8_t MouseButtonRight_flag;
+	//XWindow();
+	XWindow(int windowWidth, int windowHeight, char const * windowTitle);
 	void initScreen();
 	void punktTest();
+	void drawPoint_RGB(int x, int y, int r, int g, int b);
+	void drawLine_RGB(int x1, int y1, int x2, int y2, int r, int g, int b);
 	void drawPoint_Color565(int x, int y, uint16_t color);
 	void drawLine_Color565(int x1, int y1, int x2, int y2, uint16_t color);
 	void showNow();
 	void closeScreen();
+	void mouseUpdate();
+	uint8_t exitRequested();
 };
 
 #endif /* SYSTEM_XWINDOW_H_ */
