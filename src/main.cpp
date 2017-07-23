@@ -29,7 +29,7 @@ SerialConsole Serial;
 
 int main()
 {
-	XWindow win;
+	XWindow win(480,270,"test");
 	win.initScreen();
 	delay(2000);
 
