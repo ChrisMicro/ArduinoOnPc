@@ -51,20 +51,23 @@ create_simple_window(Display* display, int width, int height, int x, int y)
                              BlackPixel(display, screen_num),
                              WhitePixel(display, screen_num));
 
-  /* make the window actually appear on the screen. */
-  //XMapWindow(display, win);
-	XSelectInput (display, win, ExposureMask);
 
-	XMapWindow (display, win);
-	while(1)
-	{
-		  XEvent event;
-		  XNextEvent(display, &event);
-		  if (event.type == Expose)
-				break;
-	}
 
-  /* flush all pending requests to the X server. */
+  XSelectInput (display, win, ExposureMask);
+
+  // Name the window
+  XStoreName(display, win, "ArduinoOnPc");
+
+  XMapWindow (display, win);
+  while(1)
+  {
+	  XEvent event;
+	  XNextEvent(display, &event);
+	  if (event.type == Expose)
+		  break;
+  }
+
+  // flush all pending requests to the X server.
   XFlush(display);
 
   return win;
