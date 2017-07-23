@@ -17,10 +17,7 @@
 #include <X11/Xlib.h>
 
 #include <stdio.h>
-#include <stdlib.h>		/* getenv(), etc. */
-#include <unistd.h>		/* sleep(), etc.  */
-//#include <time.h>
-//#include <sys/time.h>
+#include <stdlib.h>		// getenv(), etc.
 
 #include "posixWrapper.h"
 
@@ -42,15 +39,17 @@ create_simple_window(Display* display, int width, int height, int x, int y)
   int win_border_width = 2;
   Window win;
 
-  /* create a simple window, as a direct child of the screen's */
-  /* root window. Use the screen's black and white colors as   */
-  /* the foreground and background colors of the window,       */
-  /* respectively. Place the new window's top-left corner at   */
-  /* the given 'x,y' coordinates.                              */
-  win = XCreateSimpleWindow(display, RootWindow(display, screen_num),
-                            x, y, width, height, win_border_width,
-                            BlackPixel(display, screen_num),
-                            WhitePixel(display, screen_num));
+  /*
+     create a simple window, as a direct child of the screen's
+     root window. Use the screen's black and white colors as
+     the foreground and background colors of the window,
+     respectively. Place the new window's top-left corner at
+     the given 'x,y' coordinates.
+  */
+  win = XCreateSimpleWindow( display, RootWindow(display, screen_num),
+                             x, y, width, height, win_border_width,
+                             BlackPixel(display, screen_num),
+                             WhitePixel(display, screen_num));
 
   /* make the window actually appear on the screen. */
   //XMapWindow(display, win);
@@ -109,24 +108,24 @@ GC create_gc(Display* display, Window win, int reverse_video)
   return gc;
 }
 
-Display* display;				/* pointer to X Display structure.           */
-int screen_num;					/* number of screen to place the window on.  */
-Window win;						/* pointer to the newly created window.      */
+Display* display;				// pointer to X Display structure.
+int screen_num;					// number of screen to place the window on.
+Window win;						// pointer to the newly created window.
 unsigned int display_width,
-             display_height;	/* height and width of the X display.        */
-unsigned int width, height;		/* height and width for the new window.      */
+             display_height;	// height and width of the X display.
+unsigned int width, height;		// height and width for the new window.
 
-GC gc;							/* GC (graphics context) used for drawing    */
-								/*  in our window.			     */
-Colormap screen_colormap;		/* color map to use for allocating colors.   */
+GC gc;							// GC (graphics context) used for drawing
+								//  in our window.			     */
+Colormap screen_colormap;		// color map to use for allocating colors.
 
-XColor red, brown, blue, yellow, green;	/* used for allocation of the given color    */
-										/* map entries.                              */
-Status rc;								/* return status of various Xlib functions.  */
+XColor red, brown, blue, yellow, green;	// used for allocation of the given color
+										// map entries.
+Status rc;								// return status of various Xlib functions.
 
 void initScreen()
 {
-	char *display_name = getenv("DISPLAY");  /* address of the X display.      */
+	char *display_name = getenv( "DISPLAY" );  // address of the X display.
 
 
 	  /* open connection with the X server. */
@@ -143,9 +142,9 @@ void initScreen()
 	  display_width = DisplayWidth(display, screen_num);
 	  display_height = DisplayHeight(display, screen_num);
 
-	  /* make the new window occupy 1/9 of the screen's size. */
-	  //width = (display_width / 3);
-	  //height = (display_height / 3);
+	  // make the new window
+	  // width = (display_width / 3);
+	  // height = (display_height / 3);
 	  width = (480);
 	  height = (270);
 
@@ -229,6 +228,15 @@ void closeScreen()
 void setForeground_RGB(int r, int g, int b)
 {
 	XColor xcolour;
+
+	static int old_r=-1, old_g=-1, old_b=-1;
+
+	// check of color hasn't changed and return ( more speed )
+	if( r==old_r && g==old_g && b ==old_b ) return;
+
+	old_r=r;
+	old_g=g;
+	old_b=b;
 
     xcolour.red = r*255; xcolour.green = g*255; xcolour.blue = b*255;
 
