@@ -13,6 +13,7 @@ extern "C"
 	#define PUNKT_H_
 
 	#include <stdint.h>
+	#include "posixTime.h"
 
 	// RGB565 colors
 	#define COLOR_BLACK       0x0000      /*   0,   0,   0 */
@@ -44,15 +45,6 @@ extern "C"
 	void drawLine_Color565(int x1, int y1, int x2, int y2, uint16_t color);
 	void showNow();
 	void closeScreen();
-
-	// Arduino Functions
-
-	uint32_t micros();
-	uint32_t millis();
-	void delayMicroseconds(uint32_t t);
-	void delay(uint32_t t);
-
-	void yield();
 
 	void mouseTest();
 

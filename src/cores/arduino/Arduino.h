@@ -19,8 +19,6 @@
 #define A4 4
 #define A5 5
 
-
-
 #define HIGH 0x1
 #define LOW  0x0
 
