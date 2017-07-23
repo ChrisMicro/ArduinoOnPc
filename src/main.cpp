@@ -20,10 +20,10 @@ SerialConsole Serial;
 //#include "sketch.ino"
 //#include "TFT_demo.ino"
 //#include "Touch.ino"
-#include "Flappy.ino"
+//#include "Flappy.ino"
 //#include "Adafruit_touchpaint.ino"
 //#include "Adafruit_pictureEmbed.ino"
-//#include "gameOfLife.ino"
+#include "gameOfLife.ino"
 //#include "cellArt.ino"
 
 int main()
