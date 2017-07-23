@@ -39,7 +39,9 @@ class TouchScreen {
 
 #endif
 
-/* ArduinoOnPc
+/*
+   ArduinoOnPc
+
    © ChrisMicro 2017.
    This file is part of ArduinoOnPc.
    ArduinoOnPc is free software: you can redistribute it and/or modify
@@ -51,10 +53,7 @@ class TouchScreen {
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU Lesser General Public License for more details.
    You should have received a copy of the GNU Lesser General Public License
-   along with simple_GUI_elements.  If not, see <http://www.gnu.org/licenses/>.
+   along with ArduinoOnPc.  If not, see <http://www.gnu.org/licenses/>.
 
-   If you use simple_GUI_elements in public project you can inform me about this by e-mail,
-   of course if you want it.
-
-   web-site:
+   web-site: https://github.com/ChrisMicro/ArduinoOnPc
 */

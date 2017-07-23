@@ -75,15 +75,15 @@ create_simple_window(Display* display, int width, int height, int x, int y)
 
 GC create_gc(Display* display, Window win, int reverse_video)
 {
-  GC gc;				/* handle of newly created GC.  */
-  unsigned long valuemask = 0;		/* which values in 'values' to  */
-					/* check when creating the GC.  */
-  XGCValues values;			/* initial values for the GC.   */
-  unsigned int line_width = 2;		/* line width for the GC.       */
-  int line_style = LineSolid;		/* style for lines drawing and  */
-  int cap_style = CapButt;		/* style of the line's edje and */
+  GC gc;							// handle of newly created GC.
+  unsigned long valuemask = 0;		// which values in 'values' to
+									// check when creating the GC.
+  XGCValues values;					// initial values for the GC.
+  unsigned int line_width = 2;		// line width for the GC.
+  int line_style = LineSolid;		// style for lines drawing and
+  int cap_style = CapButt;			// style of the line's edje and
 
-  int join_style = JoinBevel;		/*  joined lines.		*/
+  int join_style = JoinBevel;		//  joined lines.
   int screen_num = DefaultScreen(display);
 
   gc = XCreateGC(display, win, valuemask, &values);
