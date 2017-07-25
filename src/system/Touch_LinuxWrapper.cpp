@@ -104,7 +104,7 @@ uint16_t TouchScreen::pressure(void)
 {
 	if(Touch_Read())
 	{
-		return MouseButtonLeft_flag  * 500;
+		return window->MouseButtonLeft_flag  * 500;
 
 	}else return 0;
 }

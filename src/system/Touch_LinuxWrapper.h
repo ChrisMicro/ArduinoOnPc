@@ -8,7 +8,7 @@
 #ifndef _ADAFRUIT_TOUCHSCREEN_H_
 #define _ADAFRUIT_TOUCHSCREEN_H_
 #include <stdint.h>
-#include "posixWrapper.h"
+//#include "posixWrapper.h"
 #include "XWindow.h"
 
 class TSPoint

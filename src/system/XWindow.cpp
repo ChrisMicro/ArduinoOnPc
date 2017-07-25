@@ -101,14 +101,18 @@ uint16_t XWindow::MouseY = 0;
 uint8_t XWindow::MouseButtonLeft_flag = 0;
 uint8_t XWindow::MouseButtonRight_flag = 0;
 
+
 XWindow::XWindow(int windowWidth, int windowHeight, char const* windowTitle)
 {
 	width  = windowWidth;
 	height = windowHeight;
 	this->windowTitle=windowTitle;
-
-
 }
+/*
+XWindow::XWindow()
+{
+	XWindow::XWindow(320,240,"default");
+}*/
 
 void XWindow::initScreen()
 {
@@ -247,6 +251,24 @@ uint8_t XWindow::exitRequested()
 	return (uint8_t) MouseButtonRight_flag;
 }
 
+/*
+ ArduinoOnPc
+
+ © ChrisMicro 2017.
+ This file is part of ArduinoOnPc.
+ ArduinoOnPc is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ GuiPittix is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ You should have received a copy of the GNU Lesser General Public License
+ along with ArduinoOnPc.  If not, see <http://www.gnu.org/licenses/>.
+
+ web-site: https://github.com/ChrisMicro/ArduinoOnPc
+ */
 
 
 

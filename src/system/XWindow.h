@@ -11,6 +11,28 @@
 #include <X11/Xlib.h>
 #include <stdint.h>
 
+// RGB565 colors
+#define COLOR_BLACK       0x0000      /*   0,   0,   0 */
+#define COLOR_NAVY        0x000F      /*   0,   0, 128 */
+#define COLOR_DARKGREEN   0x03E0      /*   0, 128,   0 */
+#define COLOR_DARKCYAN    0x03EF      /*   0, 128, 128 */
+#define COLOR_MAROON      0x7800      /* 128,   0,   0 */
+#define COLOR_PURPLE      0x780F      /* 128,   0, 128 */
+#define COLOR_OLIVE       0x7BE0      /* 128, 128,   0 */
+#define COLOR_LIGHTGREY   0xC618      /* 192, 192, 192 */
+#define COLOR_DARKGREY    0x7BEF      /* 128, 128, 128 */
+#define COLOR_GREY        COLOR_LIGHTGREY
+#define COLOR_BLUE        0x001F      /*   0,   0, 255 */
+#define COLOR_GREEN       0x07E0      /*   0, 255,   0 */
+#define COLOR_CYAN        0x07FF      /*   0, 255, 255 */
+#define COLOR_RED         0xF800      /* 255,   0,   0 */
+#define COLOR_MAGENTA     0xF81F      /* 255,   0, 255 */
+#define COLOR_YELLOW      0xFFE0      /* 255, 255,   0 */
+#define COLOR_WHITE       0xFFFF      /* 255, 255, 255 */
+#define COLOR_ORANGE      0xFD20      /* 255, 165,   0 */
+#define COLOR_GREENYELLOW 0xAFE5      /* 173, 255,  47 */
+#define COLOR_PINK        0xF81F
+
 class XWindow
 {
 private:
@@ -39,7 +61,7 @@ public:
 	static uint8_t MouseButtonLeft_flag;
 	static uint8_t MouseButtonRight_flag;
 	//XWindow();
-	XWindow(int windowWidth, int windowHeight, char const * windowTitle);
+	XWindow(int windowWidth=320, int windowHeight=240, char const * windowTitle="default");
 	void initScreen();
 	void punktTest();
 	void drawPoint_RGB(int x, int y, int r, int g, int b);
@@ -53,3 +75,22 @@ public:
 };
 
 #endif /* SYSTEM_XWINDOW_H_ */
+
+/*
+ ArduinoOnPc
+
+ © ChrisMicro 2017.
+ This file is part of ArduinoOnPc.
+ ArduinoOnPc is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ GuiPittix is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ You should have received a copy of the GNU Lesser General Public License
+ along with ArduinoOnPc.  If not, see <http://www.gnu.org/licenses/>.
+
+ web-site: https://github.com/ChrisMicro/ArduinoOnPc
+ */

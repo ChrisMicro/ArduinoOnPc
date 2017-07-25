@@ -11,7 +11,7 @@
 #include "Arduino.h"
 
 #include "Adafruit_GFX.h"
-#include "posixWrapper.h"
+//#include "posixWrapper.h"
 #include "XWindow.h"
 #include "Touch_LinuxWrapper.h"
 
@@ -58,7 +58,6 @@ class TFT_LinuxWrapper : public Adafruit_GFX
     {
     	win->initScreen();
     	TouchScreen::setWindow(win);
-
     };
 
     uint32_t RGB565TORGB8888(int16_t RGB565)

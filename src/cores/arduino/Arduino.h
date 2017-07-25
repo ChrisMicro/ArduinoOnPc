@@ -9,8 +9,8 @@
 #define ARDUINO_H_
 
 #include <stdint.h>
-#include "posixWrapper.h"
-
+//#include "posixWrapper.h"
+#include "posixTime.h"
 
 #define A0 0
 #define A1 1
