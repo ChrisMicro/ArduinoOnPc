@@ -201,6 +201,7 @@ void XWindow::drawLine_RGB(int x1, int y1, int x2, int y2, int r, int g, int b)
 {
 	setForeground_RGB(r, g, b);
 	XDrawLine(display, win, gc, x1, y1, x2, y2);
+	XFlush(display);
 
 }
 
