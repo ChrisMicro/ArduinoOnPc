@@ -14,9 +14,9 @@ using namespace std;
 
 SerialConsole Serial;
 
+//#include "sketch.ino"
 //#include "Blink.ino"
 //#include "AnalogReadSerial.ino"
-//#include "sketch.ino"
 //#include "TFT_demo.ino"
 //#include "Touch.ino"
 //#include "Flappy.ino"
@@ -24,14 +24,13 @@ SerialConsole Serial;
 //#include "Adafruit_pictureEmbed.ino"
 //#include "gameOfLife.ino"
 //#include "cellArt.ino"
-#include "TekSpriteEditor.ino"
+//#include "TekSpriteEditor.ino"
+#include "guiTest.ino"
 
 int main()
 {
 	//XWindow win(480,270,"test");
 	//win.initScreen();
-	//delay(2000);
-
 
 	//initScreen();
 

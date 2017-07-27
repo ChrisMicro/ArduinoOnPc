@@ -58,6 +58,8 @@ class TFT_LinuxWrapper : public Adafruit_GFX
     {
     	win->initScreen();
     	TouchScreen::setWindow(win);
+    	delay(500); // give time to setup window
+
     };
 
     uint32_t RGB565TORGB8888(int16_t RGB565)
