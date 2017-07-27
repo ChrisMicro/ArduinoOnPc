@@ -9,15 +9,17 @@
 TouchScreen ts;
 
 
-GUI_Slider slider1 (  10,   0, "s1"  );
-GUI_Slider slider2 (           "s2"  ); // use Layoutmanger, slider is auto placed to the right
-GUI_Number number  ( 150, 100, "s1 x s2 " );
+GUI_Button button1 ( 150,100,"  up");
+GUI_Button button2 (        "down");
+
+GUI_Number number  ( 50, 50,"counter");
 
 void setup()
 {
   gui.begin();
-  slider1.show();
-  slider2.show();
+
+  button1.show();
+  button2.show();
   number.show();
 }
 
@@ -29,11 +31,10 @@ void loop(void)
   TSPoint p = ts.getPoint();
   gui.setTouch(p.x, p.y, p.z);
 
-  int value1 = slider1.getInt();
-  int value2 = slider2.getInt();
+  if (button1.wasPressed())  Counter++;
+  if (button2.wasPressed())  Counter--;
 
-  number.print(value1*value2);
+  number.print(Counter);
 
   delay(50);
 }
-

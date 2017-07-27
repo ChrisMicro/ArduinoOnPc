@@ -19,13 +19,13 @@ SerialConsole Serial;
 //#include "AnalogReadSerial.ino"
 //#include "TFT_demo.ino"
 //#include "Touch.ino"
-//#include "Flappy.ino"
+#include "Flappy.ino"
 //#include "Adafruit_touchpaint.ino"
 //#include "Adafruit_pictureEmbed.ino"
 //#include "gameOfLife.ino"
 //#include "cellArt.ino"
 //#include "TekSpriteEditor.ino"
-#include "guiTest.ino"
+//#include "guiTest.ino"
 
 int main()
 {

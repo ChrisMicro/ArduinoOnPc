@@ -266,7 +266,7 @@ void setup()
   tft.begin();
   tft.fillScreen(LTDC_BLACK);
 
-  //tft.setRotation(1);
+  tft.setRotation(1);
   tft.setCursor(0, 0);
   tft.setTextColor(LTDC_GREEN);  tft.setTextSize(3);
   tft.println("Arduino TFT");
