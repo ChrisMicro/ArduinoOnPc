@@ -1,7 +1,7 @@
 /*
-   Sprite Edigor
+   Sprite Editor
 
-   June 2017, ChrisMicro
+   July 2017, ChrisMicro
 */
 
 #include "TFT_LinuxWrapper.h" // TFT
