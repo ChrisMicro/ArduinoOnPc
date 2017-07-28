@@ -155,8 +155,13 @@ void loop(void)
 	  SpriteBuffer[SpriteBufferIndex]=0;
   }
 
-  showSprite(SpriteBuffer);
-  Serial.println(SpriteBuffer);
+  static int oldIndex=0;
+  if(oldIndex!=SpriteBufferIndex)
+  {
+	  oldIndex=SpriteBufferIndex;
+	  showSprite(SpriteBuffer);
+	  Serial.println(SpriteBuffer);
+  }
 
   delay(50);
 }
