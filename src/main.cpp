@@ -26,7 +26,9 @@ SerialConsole Serial;
 //#include "cellArt.ino"
 //#include "TekSpriteEditor.ino"
 //#include "guiTest.ino"
-#include <TekSpriteEditor2.ino>
+//#include <TekSpriteEditor2.ino>
+//#include "simple.ino"
+#include "strandtest.ino"
 
 int main()
 {
