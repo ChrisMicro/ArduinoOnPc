@@ -49,7 +49,7 @@ class TFT_LinuxWrapper : public Adafruit_GFX
 
     TFT_LinuxWrapper(): Adafruit_GFX((int16_t) TFT_HEIGTH, (int16_t) TFT_WIDTH)
     {
-    	win=new XWindow(TFT_WIDTH,TFT_HEIGTH,"TFT emulation");
+    	//win=new XWindow(TFT_WIDTH,TFT_HEIGTH,"TFT emulation");
     }
 
     void init()
@@ -59,6 +59,7 @@ class TFT_LinuxWrapper : public Adafruit_GFX
 
     void begin()
     {
+    	win=new XWindow(TFT_WIDTH,TFT_HEIGTH,"TFT emulation");
     	win->initScreen();
     	TouchScreen::setWindow(win);
     	setRotation(1);

@@ -35,16 +35,6 @@
 
 #include "Adafruit_NeoPixel.h"
 
-#define ARDUINO_ON_PC
-#ifdef ARDUINO_ON_PC
-	#include "stdlib.h" // free, malloc
-    #include "string.h" // memset
-	#define NULL 0
-
-	#include "TFT_LinuxWrapper.h"
-
-	TFT_LinuxWrapper tft;
-#endif
 
 #if defined(NRF52)
 #include "nrf.h"
@@ -61,17 +51,15 @@ Adafruit_NeoPixel::Adafruit_NeoPixel(uint16_t n, uint8_t p, neoPixelType t) :
   updateType(t);
   updateLength(n);
   setPin(p);
+}
 
 #ifdef ARDUINO_ON_PC
-  tft.begin();
-  tft.fillScreen(LTDC_BLACK);
-
-  //tft.setRotation(1);
-  tft.setCursor(0, 0);
-  tft.setTextColor(LTDC_DARKGREY);  tft.setTextSize(2);
-  tft.println("neoPixel");
-#endif
+Adafruit_NeoPixel::Adafruit_NeoPixel(uint16_t n, TFT_LinuxWrapper tft)
+{
+  updateType(NEO_GRB + NEO_KHZ800);
+  updateLength(n);
 }
+#endif
 
 // via Michael Vogt/neophob: empty constructor is used when strand length
 // isn't known at compile-time; situations where program config might be
@@ -93,13 +81,37 @@ Adafruit_NeoPixel::~Adafruit_NeoPixel() {
 }
 
 void Adafruit_NeoPixel::begin(void) {
-  if(pin >= 0) {
-    pinMode(pin, OUTPUT);
-    digitalWrite(pin, LOW);
-  }
-  begun = true;
+#ifdef ARDUINO_ON_PC
+	ptft->begin();
+	ptft->fillScreen(LTDC_BLACK);
+
+	//ptft->setRotation(1);
+	ptft->setCursor(0, 0);
+	ptft->setTextColor(LTDC_DARKGREY);  ptft->setTextSize(2);
+#endif
+
+	if(pin >= 0) {
+	pinMode(pin, OUTPUT);
+	digitalWrite(pin, LOW);
+	}
+	begun = true;
 
 }
+
+#ifdef ARDUINO_ON_PC
+void Adafruit_NeoPixel::begin(uint16_t x, uint16_t y, TFT_LinuxWrapper *tft) {
+	posX=x;
+	posY=y;
+	ptft=tft;
+	//  ptft->begin();
+	ptft->fillScreen(COLOR_BLACK);
+
+	//ptft->setRotation(1);
+	ptft->setCursor(0, 0);
+	ptft->setTextColor(COLOR_DARKGREY);  ptft->setTextSize(2);
+	begun = true;
+}
+#endif
 
 void Adafruit_NeoPixel::updateLength(uint16_t n) {
   if(pixels) free(pixels); // Free existing data (if any)
@@ -1839,8 +1851,8 @@ void Adafruit_NeoPixel::show(void) {
   }
 
 #elif defined(ARDUINO_ON_PC)
-  int pos_x=50;
-  int pos_y=50;
+  int pos_x=posX;
+  int pos_y=posY;
   int ledSize=20;
 
   for(int n=0;n<numLEDs;n++)
@@ -1858,8 +1870,10 @@ void Adafruit_NeoPixel::show(void) {
 		xn-=numberOfLedsLineBreak;
 		y+=ledSize*2;
 	}
+	ptft->drawRect(pos_x+xn*ledSize-1, y-1, ledSize, ledSize, COLOR_DARKGREY );
+	ptft->fillRect(pos_x+xn*ledSize, y, ledSize-2, ledSize-2, ptft->color565(r,g,b) ); // color565
+	//ptft->fillCircle(pos_x+xn*ledSize, y, ledSize/2-2, ptft->color565(r,g,b) ); // color565
 
-	tft.fillRect(pos_x+xn*ledSize, y, ledSize-2, ledSize-2, tft.color565(r,g,b) ); // color565
   }
 #else
 	#error Architecture not supported

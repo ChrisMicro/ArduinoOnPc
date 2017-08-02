@@ -28,7 +28,8 @@ SerialConsole Serial;
 //#include "guiTest.ino"
 //#include <TekSpriteEditor2.ino>
 //#include "simple.ino"
-#include "strandtest.ino"
+//#include "strandtest.ino"
+#include "mixedTape.ino"
 
 int main()
 {

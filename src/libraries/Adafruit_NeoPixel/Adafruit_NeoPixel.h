@@ -26,6 +26,16 @@
  #include <pins_arduino.h>
 #endif
 
+#define ARDUINO_ON_PC
+#ifdef ARDUINO_ON_PC
+	#include "stdlib.h" // free, malloc
+    #include "string.h" // memset
+	//#define NULL 0
+
+	#include "TFT_LinuxWrapper.h"
+#endif
+
+
 // The order of primary colors in the NeoPixel data stream can vary
 // among device types, manufacturers and even different revisions of
 // the same item.  The third parameter to the Adafruit_NeoPixel
@@ -118,12 +128,17 @@ class Adafruit_NeoPixel {
  public:
 
   // Constructor: number of LEDs, pin number, LED type
+#define ARDUINO_ON_PC
+#ifdef ARDUINO_ON_PC
+	  Adafruit_NeoPixel(uint16_t n, TFT_LinuxWrapper tft);
+#endif
   Adafruit_NeoPixel(uint16_t n, uint8_t p=6, neoPixelType t=NEO_GRB + NEO_KHZ800);
   Adafruit_NeoPixel(void);
   ~Adafruit_NeoPixel();
 
   void
     begin(void),
+    begin(uint16_t posX, uint16_t posY,TFT_LinuxWrapper *tft),
     show(void),
     setPin(uint8_t p),
     setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b),
@@ -149,6 +164,11 @@ class Adafruit_NeoPixel {
     canShow(void) { return (micros() - endTime) >= 300L; }
 
  protected:
+  TFT_LinuxWrapper defaultTFT;
+  TFT_LinuxWrapper *ptft;
+
+  uint16_t posX;
+  uint16_t posY;
 
   boolean
 #ifdef NEO_KHZ400  // If 400 KHz NeoPixel support enabled...
