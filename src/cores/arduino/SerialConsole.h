@@ -9,9 +9,6 @@
 #define CORES_ARDUINO_SERIALCONSOLE_H_
 
 #include "Stream.h"
-#include <stdint.h>
-
-
 
 class SerialConsole : public Stream  {
 public:
@@ -26,5 +23,7 @@ public:
     using Print::write; // pull in write(str) and write(buf, size) from Print
     operator bool() { return true; }; // UART always active
 };
+
+extern SerialConsole Serial;
 
 #endif /* CORES_ARDUINO_SERIALCONSOLE_H_ */
