@@ -1,4 +1,5 @@
 # FastLED on PC
+Fastled using SDL by [benpicco](https://github.com/benpicco/FastLEDonPc)
 
 ## What?
 
