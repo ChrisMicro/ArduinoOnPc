@@ -16,6 +16,16 @@ It takes three weeks to ship a serial LED strip from China, but I want to start 
 
 # HowTo
 
+In short: 
+Change to the Aurora directory and type make
+```
+cd example/Aurora/
+```
+```
+make
+```
+
+In detail:
 If you are using [Arduino Make](https://github.com/sudar/Arduino-Makefile), it should be sufficient to
 replace the `Arduino.mk` include with `makeNativeArduino.mk` in your Makefile.
 Then simply run `make` as usual.
