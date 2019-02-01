@@ -8,9 +8,17 @@
 #ifndef ARDUINO_H_
 #define ARDUINO_H_
 
-#include <stdint.h>
+#include <cstdint>
+#include <cstring>
+#include <cstdlib>
+#include <cstddef>
+#include <cmath>
+
 //#include "posixWrapper.h"
+#include "binary.h"
 #include "posixTime.h"
+
+#include "SerialConsole.h"
 
 #define A0 0
 #define A1 1
@@ -25,6 +33,9 @@
 #define INPUT 0x0
 #define OUTPUT 0x1
 #define INPUT_PULLUP 0x2
+
+#define LSBFIRST 0
+#define MSBFIRST 1
 
 #define PI 3.1415926535897932384626433832795
 #define HALF_PI 1.5707963267948966192313216916398

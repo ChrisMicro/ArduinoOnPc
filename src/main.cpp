@@ -6,13 +6,14 @@
  *
  */
 
-#include <iostream>
-using namespace std;
-#include "./cores/arduino/SerialConsole.h"
+//#include <iostream>
+//using namespace std;
+//#include "./cores/arduino/SerialConsole.h"
 #include "Arduino.h"
+#include SKETCH_FILE
 
 
-SerialConsole Serial;
+//SerialConsole Serial;
 
 //#include "sketch.ino"
 //#include "Blink.ino"
@@ -26,7 +27,7 @@ SerialConsole Serial;
 //#include "cellArt.ino"
 //#include "TekSpriteEditor.ino"
 //#include "guiTest.ino"
-#include <TekSpriteEditor2.ino>
+//#include <TekSpriteEditor2.ino>
 
 int main()
 {
