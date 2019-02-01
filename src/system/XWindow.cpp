@@ -9,6 +9,7 @@
 #include <XWindow.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 /*
  * function: create_simple_window. Creates a window with a white background
@@ -70,7 +71,7 @@ GC XWindow::create_gc( Display* display, Window win, int reverse_video )
 
 	gc = XCreateGC(display, win, valuemask, &values);
 
-	if (gc < 0)
+	if ((intptr_t)gc < 0)
 	{
 		fprintf(stderr, "XCreateGC: \n");
 	}
