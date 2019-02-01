@@ -35,7 +35,8 @@ POSTCOMPILE = @mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d && touch $@
 define add_lib
 SRC_C    += $(shell find $1 -name '*.c')
 SRC_CXX  += $(shell find $1 -name '*.cpp')
-SRC_USER = $(shell find $(SKETCH_ROOT) -name "*.c" -o -name "*.cpp")
+SRC_USER_C = $(shell find $(SKETCH_ROOT) -name "*.c")
+SRC_USER_CXX = $(shell find $(SKETCH_ROOT) -name "*.cpp")
 
 INCLUDES += -I$1
 endef
@@ -52,15 +53,16 @@ INC_USER_FOLDERS = $(foreach folder, $(USER_FOLDERS), -I$(folder))
 
 OBJECTS += $(SRC_C:%.c=$(BUILD_ROOT)/%.o)
 OBJECTS += $(SRC_CXX:%.cpp=$(BUILD_ROOT)/%.o)
-OBJECTS += $(SRC_USER:%.c=$(BUILD_ROOT)/%.o)
-OBJECTS += $(SRC_USER:%.cpp=$(BUILD_ROOT)/%.o)
+OBJECTS += $(SRC_USER_C:%.c=$(BUILD_ROOT)/%.o)
+OBJECTS += $(SRC_USER_CXX:%.cpp=$(BUILD_ROOT)/%.o)
 
 SRCS += $(SRC_C)
 SRCS += $(SRC_CXX)
-SRCS += $(SRC_USER)
+SRCS += $(SRC_USER_C)
+SRCS += $(SRC_USER_CXX)
 
 $(TARGET): $(OBJECTS)
-	$(Q)$(CXX) $(INC_USER_FOLDERS) $(OBJECTS) $(LDFLAGS) -o $@
+	$(Q)$(CXX) $(INC_USER_FOLDERS) $(INCLUDES) $(OBJECTS) $(LDFLAGS) -o $@
 	@size $@
 
 clean:
@@ -74,7 +76,13 @@ print:
 	@echo "SRCS:\t $(SRCS)"
 	@echo "SKETCH:\t $(SKETCH)"
 	@echo "ROOT:\t $(NATIVE_ROOT)"
-	@echo "INC_USER_FOLDERS:\t $(INC_USER_FOLDERS)"
+	@echo "SRC_C   :\t $(SRC_C)"
+	@echo "SRC_CXX :\t $(SRC_CXX)"
+	@echo "SRC_USER:\t $(SRC_USER)"
+	@echo ":\t $(INC_USER_FOLDERS)"
+
+
+
 
 $(BUILD_ROOT)/%.o : %.c $(DEPDIR)/%.d
 	@mkdir -p `dirname $@`
