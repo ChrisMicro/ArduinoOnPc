@@ -23,10 +23,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
+#include <cmath>
 #include "Arduino.h"
 
 #include "Print.h"
+
+using namespace std;
 
 // Public Methods //////////////////////////////////////////////////////////////
 
