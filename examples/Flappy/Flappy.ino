@@ -13,21 +13,11 @@
 #include "TFT_LinuxWrapper.h" // TFT
 #include "Touch_LinuxWrapper.h" // TOUCH
 
+#include "constants.h"
+#include "collisions.h" //Check bird collisions
+
 TFT_LinuxWrapper tft;
 
-
-#define BLACK   0x0000
-#define BLUE    0x001F
-#define RED     0xF800
-#define GREEN   0x07E0
-#define CYAN    0x07FF
-#define MAGENTA 0xF81F
-#define YELLOW  0xFFE0
-#define WHITE   0xFFFF
-
-#define SENSIBILITY 300
-#define MINPRESSURE 10
-#define MAXPRESSURE 1000
 
 TouchScreen          ts;
 
@@ -43,7 +33,6 @@ long nextDrawLoopRunTime;
 
 void startGame();
 void drawLoop();
-void checkCollision();
 
 void setup()
 {
@@ -89,7 +78,7 @@ void loop(void)
   if (millis() > nextDrawLoopRunTime )
   {
     drawLoop();
-    checkCollision();
+    checkCollision(fx, fy, pillarPos, gapPos, score, &crashed, &running, tft);
     nextDrawLoopRunTime += 50;
   }
 
@@ -209,32 +198,6 @@ void clearFlappy(int x, int y) {
   tft.fillRect(x, y, 34, 24, BLUE);
 }
 
-void checkCollision() {
-  // Collision with ground
-  if (fy > 206) crashed = true;
-
-  // Collision with pillar
-  if (fx + 34 > pillarPos && fx < pillarPos + 50)
-    if (fy < gapPos || fy + 24 > gapPos + 90)
-      crashed = true;
-
-  if (crashed) {
-    tft.setTextColor(WHITE);
-    tft.setTextSize(2);
-    tft.setCursor(75, 75);
-    tft.print("Game Over!");
-    tft.setCursor(75, 125);
-    tft.print("Score:");
-    tft.setCursor(220, 125);
-    tft.print(score);
-
-    // stop animation
-    running = false;
-
-    // delay to stop any last minute clicks from restarting immediately
-    delay(1000);
-  }
-}
 void drawLoop() {
   // clear moving items
   clearPillar(pillarPos, gapPos);
