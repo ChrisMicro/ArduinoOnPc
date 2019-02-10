@@ -14,19 +14,19 @@ $(shell mkdir -p $(BUILD_ROOT))
 
 CFLAGS += -Wall -Wextra -Wno-unused-parameter
 CFLAGS += -DARDUINO=101 -DSKETCH_FILE=\"$(SKETCH)\"
-CFLAGS += -DFASTLED_SDL $(shell sdl2-config --cflags)
 CFLAGS += -std=gnu11
 CFLAGS += -lm
+#CFLAGS += -DFASTLED_SDL $(shell sdl2-config --cflags)
 
 CXXFLAGS += -Wall -Wextra -Wno-unused-parameter
 CXXFLAGS += -DARDUINO=101 -DSKETCH_FILE=\"$(SKETCH)\"
-CXXFLAGS += -DFASTLED_SDL $(shell sdl2-config --cflags)
 CXXFLAGS += -Wno-class-memaccess # FastLED does some naughty things
 CXXFLAGS += -std=gnu++11
+#CXXFLAGS += -DFASTLED_SDL $(shell sdl2-config --cflags)
 
-LDFLAGS += $(shell sdl2-config --libs)
 LDFLAGS += -Wl,--gc-sections
 LDFLAGS += -L/usr/X11R6/lib -lX11
+#LDFLAGS += $(shell sdl2-config --libs)
 
 DEPDIR := $(BUILD_ROOT)
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
