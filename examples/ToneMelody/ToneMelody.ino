@@ -7,7 +7,7 @@
  *
  */
 
-#define APLAY "aplay --file-type wav --format S16_LE"
+#define APLAY "aplay -q --file-type wav --format S16_LE"
 
 
 #define SAMPLINGFREQUENCY 8000
