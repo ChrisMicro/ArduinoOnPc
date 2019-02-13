@@ -25,7 +25,8 @@ CXXFLAGS += -std=gnu++11
 #CXXFLAGS += -DFASTLED_SDL $(shell sdl2-config --cflags)
 
 LDFLAGS += -Wl,--gc-sections
-LDFLAGS += -L/usr/X11R6/lib -lX11
+LDFLAGS += -L/usr/X11R6/lib -lX11  # include X11 library
+LDFLAGS += -pthread                # include linux thread library
 #LDFLAGS += $(shell sdl2-config --libs)
 
 DEPDIR := $(BUILD_ROOT)

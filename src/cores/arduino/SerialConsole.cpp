@@ -5,59 +5,87 @@
  *      Author: christoph
  */
 
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/select.h>
 #include "SerialConsole.h"
+#include <queue>
+#include <chrono>
+#include <thread>
+#include <mutex>
+#include <atomic>
+
+std::queue < char > avaliableInput;
+std::mutex inputMutex;
+std::thread t1;
+std::atomic<bool> active(true);
 
 SerialConsole::SerialConsole()
 {
 
 }
 
+void loadData() {
+    while(active){
+        char c = getchar();
+        // Avoid race conditions
+        std::lock_guard<std::mutex> guard(inputMutex);
+        avaliableInput.push(c);
+    }
+}
+
 void SerialConsole:: begin(const uint32_t baud)
 {
-	// It's local, no need to start a connection
+    // Worker that reads from stdin.
+    // This is needed so as not to block the main thread.
+    active=true;
+    t1 = std::thread(loadData);
+    t1.detach();
 }
 
 void SerialConsole::end(void)
 {
-	// It's local, no need to end a connection
+    /*Stop reading input. It will read 1 extra character but
+     * thats inevitable*/
+    active = false;
 }
 
 int SerialConsole::available(void)
 {
-	// Check if stdin has characters
-	char c;
-	if (scanf("%c", &c) == -1)
-	{
-		return 0;
-	}
-	// Return read character to buffer
-	ungetc(c, stdin);
-	return 1;
+    std::lock_guard<std::mutex> guard(inputMutex);
+    return !avaliableInput.empty();
 }
 
 int SerialConsole::peek(void)
 {
-	char c, read = scanf("%c", &c);
-	if( read != -1)
-		ungetc(c, stdin);
-	return c;
+    if(available()) {
+        std::lock_guard<std::mutex> guard(inputMutex);
+        return avaliableInput.front();
+    }
+    return -1;
 }
 
 int SerialConsole::read(void)
 {
-	char c, read = scanf("%c", &c);
-	return (read == -1) ? -1 : c;
+    if(available()) {
+        std::lock_guard<std::mutex> guard(inputMutex);
+        char c = avaliableInput.front();
+        avaliableInput.pop();
+        return c;
+    }
+    return -1;
 }
 
 void SerialConsole::flush(void)
 {
-	fflush(stdin);
+    fflush(stdin);
 }
 
 size_t SerialConsole::write(const uint8_t c)
 {
-	putchar(c);
-	return 1;
+    putchar(c);
+    return 1;
 }
 
 SerialConsole Serial;
+
