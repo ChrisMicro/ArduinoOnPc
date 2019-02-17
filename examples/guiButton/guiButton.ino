@@ -1,16 +1,12 @@
 #include "TFT_LinuxWrapper.h"
-//#include "../libraries/Wire/Wire.h"
+
 #define TFT_PC
-#include "../libraries/GuiPittix/Gui.h"
-
-//#include "Touch_LinuxWrapper.h" // TOUCH
-
+#include "Gui.h"
 
 TouchScreen ts;
 
-
 GUI_Button button1 ( 150,100,"  up");
-GUI_Button button2 (        "down");
+GUI_Button button2 (         "down");
 
 GUI_Number number  ( 50, 50,"counter");
 
