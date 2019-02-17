@@ -1,7 +1,8 @@
 #include "TFT_LinuxWrapper.h"
 
-#define TFT_PC
-#include "../libraries/GuiPittix/Gui.h"
+// tell the Gui library to use PC emulation instead of real TFT
+#define TFT_PC 
+#include "Gui.h"
 
 GUI_Led   led1("set   ");
 GUI_Led   led2("toggle");
