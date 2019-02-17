@@ -1,10 +1,14 @@
 /*
- *  game of life
+ * cell art
+ * growing cells inspiered by the game of life
  *
  *  Created on: 21.07.2017
  *      Author: ChrisMicro
  *  
+ *
  *  Copyright see below. Please maintain the list of authors.    
+ *
+ *  17.2.2019 V2 repeating growth 
  *
  */
 
@@ -30,6 +34,17 @@ void showField()
 		{
 			tft.drawPixel(x,y,Field [SelectedField] [x] [y] );
 		}
+}
+
+void clearField()
+{
+	for( int x=0; x<DIMENSION_X; x++)
+		for(int y=0;y<DIMENSION_Y; y++)
+		{
+			Field [0] [x] [y] = COLOR_BLACK;
+			Field [1] [x] [y] = COLOR_BLACK;
+		}
+	showField();
 }
 
 
@@ -159,42 +174,27 @@ void setup()
   //tft.setRotation(1);
   tft.setCursor(0, 0);
   tft.setTextColor(LTDC_GREEN);  tft.setTextSize(3);
-  tft.println("Game of Life");
+  tft.println("cell art");
   tft.setTextColor(LTDC_YELLOW); tft.setTextSize(2);
   tft.fillScreen(LTDC_BLACK);
-  
-  // initialize play field with ramdom living cells
-  /*
-  int initialNumberOfLivingCells=DIMENSION_X*DIMENSION_Y/5;
-  for(int n=0;n<initialNumberOfLivingCells;n++)
-  {
-
-		Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_GREEN;
-
-  }*/
-  /*
-  int initialNumberOfLivingCells = 100;
-  for(int n=0;n<initialNumberOfLivingCells;n++)
-  {
-
-		Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=(COLOR_RED*random(100)+COLOR_GREEN*random(100)+COLOR_BLUE*random(100))/255;
-
-  }*/
-  
-	Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_GREEN;
-	Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_RED;
-	Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_BLUE;
-	Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_YELLOW;
-
-	showField();
-  delay(3000);
-
+ 
 }
 
 void loop(void)
 {
-	calcNextField();
-	//gameOfLife();	
+  Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_GREEN;
+  Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_RED;
+  Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_BLUE;
+  Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_YELLOW;
+
+  showField();
+  delay(2000);
+
+  long startTime=millis();
+  while(millis()-startTime<60000)  calcNextField();
+
+  delay(3000);
+  clearField();
 }
 
 /* ArduinoOnPc
