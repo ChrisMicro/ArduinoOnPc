@@ -1,0 +1,49 @@
+Eclipse 
+
+new project => managed project ==> empty project ==> Linux GCC
+
+
+import files ==> ArduinoOnPC
+
+* examples
+* libraries
+* src
+
+options: Create Links in workspace
+
+
+Propertiers => C/C++ General => Paths and Symbols
+
+
+selection of *.ino main file:
+
+Properties => C/C++ Build ==> Settings ==> Preprocessor ==> defined symbols
+
+SKETCH_FILE=Blink.ino
+
+add path to *.ino file:
+
+Properties => Properties => Paths and Symbols ==> add workspace =>=> examples Blink
+
+Properties => C/C++ Build => C/C++ Linker
+
+
+libraries -l
+
+X11
+
+library search path -L
+
+/usr/X11R6/lib
+
+Properties => C/C++ Build => Dialect
+ISO C++11
+
+
+
+
+
+how to get the submodules if they are missing in the repo?
+
+git submodule init 
+git submodule updates
