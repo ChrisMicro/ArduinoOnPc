@@ -37,7 +37,7 @@
 // attention: size optitions to be reworked!
 
 #define TFT_WIDTH 480
-#define TFT_HEIGTH 272
+#define TFT_HEIGHT 272
 
 class TFT_LinuxWrapper : public Adafruit_GFX
 {
@@ -45,11 +45,18 @@ class TFT_LinuxWrapper : public Adafruit_GFX
 
   public:
 
-	XWindow *win;
+    XWindow *win;
 
-    TFT_LinuxWrapper(): Adafruit_GFX((int16_t) TFT_HEIGTH, (int16_t) TFT_WIDTH)
+    // FIXME: add comment, why are X and Y reversed and setRotation(1) used below?
+    TFT_LinuxWrapper(): Adafruit_GFX((int16_t) TFT_HEIGHT, (int16_t) TFT_WIDTH)
     {
-    	win=new XWindow(TFT_WIDTH,TFT_HEIGTH,"TFT emulation");
+    	win=new XWindow(TFT_WIDTH,TFT_HEIGHT,"TFT emulation");
+    }
+
+    // FIXME: reversed too, see above.
+    TFT_LinuxWrapper(uint16_t sizex, uint16_t sizey): Adafruit_GFX(sizey, sizex)
+    {
+    	win=new XWindow(sizex, sizey,"TFT emulation");
     }
 
     void init()

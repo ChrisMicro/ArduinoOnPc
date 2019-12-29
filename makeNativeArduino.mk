@@ -16,12 +16,14 @@ CFLAGS += -Wall -Wextra -Wno-unused-parameter
 CFLAGS += -DARDUINO=101 -DSKETCH_FILE=\"$(SKETCH)\"
 CFLAGS += -std=gnu11
 CFLAGS += -lm
+CFLAGS += -DARDUINOONPC
 #CFLAGS += -DFASTLED_SDL $(shell sdl2-config --cflags)
 
 CXXFLAGS += -Wall -Wextra -Wno-unused-parameter
 CXXFLAGS += -DARDUINO=101 -DSKETCH_FILE=\"$(SKETCH)\"
 CXXFLAGS += -Wno-class-memaccess # FastLED does some naughty things
 CXXFLAGS += -std=gnu++11
+CXXFLAGS += -DARDUINOONPC
 #CXXFLAGS += -DFASTLED_SDL $(shell sdl2-config --cflags)
 
 LDFLAGS += -Wl,--gc-sections
@@ -81,8 +83,6 @@ print:
 	@echo "SRC_CXX :\t $(SRC_CXX)"
 	@echo "SRC_USER:\t $(SRC_USER)"
 	@echo ":\t $(INC_USER_FOLDERS)"
-
-
 
 
 $(BUILD_ROOT)/%.o : %.c $(DEPDIR)/%.d
