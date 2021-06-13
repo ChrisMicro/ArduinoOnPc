@@ -51,3 +51,8 @@ make
 # Execute
 ./Adafruit_touchpaint
 ```
+## Adding Libraries
+
+### How to include other (non hardware dependent) libraries
+* copy them to the /libraries folder 
+* add the relative path to the include file to your project's Makefile (including "src" if needed, e.g. like this: ARDUINO_LIBS += YACL/src)
