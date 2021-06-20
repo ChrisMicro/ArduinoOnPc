@@ -34,14 +34,12 @@
 #define LTDC_GREENYELLOW 0xAFE5      /* 173, 255,  47 */
 #define LTDC_PINK        0xF81F
 
-// attention: size optitions to be reworked!
-
+// default window size
 #define TFT_WIDTH 480
 #define TFT_HEIGTH 272
 
 class TFT_LinuxWrapper : public Adafruit_GFX
 {
-
 
   public:
 
@@ -60,6 +58,16 @@ class TFT_LinuxWrapper : public Adafruit_GFX
     void begin()
     {
     	win=new XWindow(TFT_WIDTH,TFT_HEIGTH,"TFT emulation");
+    	win->initScreen();
+    	TouchScreen::setWindow(win);
+    	setRotation(1);
+    	delay(500); // give time to setup window
+
+    };
+
+    void begin(int w,int h)
+    {
+    	win=new XWindow(w,h,"TFT emulation");
     	win->initScreen();
     	TouchScreen::setWindow(win);
     	setRotation(1);

@@ -1,7 +1,11 @@
 /*
- *  game of life
+ *  cell art
+ *
+ *  Simulating growing cells inspired by the game of life algorithm
  *
  *  Created on: 21.07.2017
+ *  last:		20.06.2021
+ *
  *      Author: ChrisMicro
  *  
  *  Copyright see below. Please maintain the list of authors.    
@@ -13,8 +17,10 @@
 TFT_LinuxWrapper tft;
 
 // play field dimension
-#define DIMENSION_X 320
-#define DIMENSION_Y 240
+
+#define DIMENSION_X 480
+#define DIMENSION_Y 320
+
 
 typedef  uint16_t color_t;
 
@@ -84,8 +90,6 @@ void calcNextField()
 							color = c;
 							count++;
 						}
-					
-
 				}
 				
 				if(count > random(8))Field [!nextField] [x] [y] = color;
@@ -153,7 +157,7 @@ void setup()
 {
   Serial.begin(115200);
   Serial.print("test");
-  tft.begin();
+  tft.begin(DIMENSION_X,DIMENSION_Y);
   tft.fillScreen(LTDC_BLACK);
 
   //tft.setRotation(1);
@@ -162,6 +166,7 @@ void setup()
   tft.println("Game of Life");
   tft.setTextColor(LTDC_YELLOW); tft.setTextSize(2);
   tft.fillScreen(LTDC_BLACK);
+  uint16_t color;
   
   // initialize play field with ramdom living cells
   /*
@@ -172,20 +177,52 @@ void setup()
 		Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_GREEN;
 
   }*/
-  /*
+/*
   int initialNumberOfLivingCells = 100;
   for(int n=0;n<initialNumberOfLivingCells;n++)
   {
 
 		Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=(COLOR_RED*random(100)+COLOR_GREEN*random(100)+COLOR_BLUE*random(100))/255;
 
-  }*/
-  
+  }
+  */
+  uint16_t ColorList[]=
+  {
+		//COLOR_BLACK,
+		COLOR_NAVY,
+		//COLOR_DARKGREEN,
+		COLOR_DARKCYAN,
+		COLOR_MAROON,
+		COLOR_PURPLE,
+		COLOR_OLIVE,
+		COLOR_LIGHTGREY,
+		COLOR_DARKGREY,
+		COLOR_GREY,
+		COLOR_BLUE,
+		COLOR_GREEN,
+		COLOR_CYAN,
+		COLOR_RED,
+		COLOR_MAGENTA,
+		COLOR_YELLOW,
+		COLOR_WHITE,
+		COLOR_ORANGE,
+		COLOR_GREENYELLOW,
+		COLOR_PINK
+  	  };
+  int initialNumberOfLivingCells = 25;
+  for(int n=0;n<initialNumberOfLivingCells;n++)
+  {
+	  int index=random(18);
+	  color = ColorList[index]+random(1000)-500;
+	  Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=color;
+
+  }
+  /*
 	Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_GREEN;
 	Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_RED;
 	Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_BLUE;
 	Field[SelectedField][1+random(DIMENSION_X-2)][1+random(DIMENSION_Y-2)]=COLOR_YELLOW;
-
+   */
 	showField();
   delay(3000);
 

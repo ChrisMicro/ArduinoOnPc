@@ -1,5 +1,11 @@
 Eclipse 
 
+General usage
+1. disable by a right click the examples folder
+2. select the *.ino file to be compiled in the main.cpp file
+
+If you want to create a new Eclipse project:
+
 new project => managed project ==> empty project ==> Linux GCC
 
 
