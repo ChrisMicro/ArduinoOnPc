@@ -23,13 +23,14 @@ SerialConsole Serial;
 //#include "Adafruit_touchpaint.ino"
 //#include "Adafruit_pictureEmbed.ino"
 //#include "gameOfLife.ino"
-#include "cellArt.ino"
+//#include "cellArt.ino"
 //#include "TekSpriteEditor.ino"
 //#include "guiTest.ino"
 //#include <TekSpriteEditor2.ino>
 //#include "simple.ino"
 //#include "strandtest.ino"
 //#include "mixedTape.ino"
+#include "TFT_simpleOscilloscope.ino"
 
 int main()
 {

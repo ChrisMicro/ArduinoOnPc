@@ -15,7 +15,7 @@ void analogReference(uint8_t mode)
 
 int analogRead(uint8_t pin)
 {
-	return 123;
+	return random()/256/65536;
 }
 
 void analogWrite(uint8_t pin, int val)
