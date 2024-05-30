@@ -2,7 +2,7 @@
 
 ## What?
 
-With this software you can run an Arduino Sketch on your PC.
+With this software you can run an Arduino Sketch on your PC or a Raspberry Pi.
 You don't need an Arduino hardware.
 The focus here is mainly on TFTs connected to an Arduino.
 
